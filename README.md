@@ -63,7 +63,8 @@ During the project creation process, you will be prompted to enter values for th
 |
 ├─ assets                      # Resources for the project
 |
-├─ data                        # Categorized data files                       
+├─ data                        # Categorized data files
+|  ├─ interim                  # Intermediate data                       
 |  ├─ processed                # Cleaned data
 |  └─ raw                      # Original data
 |
