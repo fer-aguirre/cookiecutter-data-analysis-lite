@@ -16,9 +16,10 @@ python = "^{{cookiecutter.python_version}}"
 ipykernel = "*"
 nbformat = "*"
 pandas = "*"
+polars = "*"
 numpy = "*"
 requests = "*"
-plotly = "*"
+plotnine = "*"
 openpyxl = "*"
 
 [build-system]
@@ -43,9 +44,10 @@ dependencies = [
     "ipykernel",
     "nbformat",
     "pandas",
+    "polars",
     "numpy",
     "requests",
-    "plotly",
+    "plotnine",
     "openpyxl",
 ]
 
