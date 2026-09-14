@@ -16,6 +16,7 @@ Created by: {{cookiecutter.project_author}}
 |
 ├─ data                        # Categorized data files                       
 |  ├─ processed                # Cleaned data
+|  ├─ interim                  # Intermediate data
 |  └─ raw                      # Original data
 |
 ├─ docs                        # Quarto's rendered docs
