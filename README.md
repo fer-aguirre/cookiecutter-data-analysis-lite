@@ -50,7 +50,7 @@ During the project creation process, you will be prompted to enter values for th
 | `project_license`  | Choose between MIT License or GNU General Public License v3   |
 | `python_version`   | Choose between Python 3.8 or 3.11                             |
 | `package_manager`  | Choose between uv or poetry for dependency management         |
-| `include_quarto`   | Choose whether to include Quarto config files (defaults to No) |
+| `include_quarto`   | Choose whether to include Quarto config files                 |
 
 ---
 
