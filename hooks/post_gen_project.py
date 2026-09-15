@@ -28,7 +28,7 @@ INCLUDE_QUARTO = "{{cookiecutter.include_quarto}}"
 
 MINIMUM_PYTHON = (3, 8)
 
-QUARTO_PATHS = ["_quarto.yml", "custom.scss", "index.qmd", "docs"]
+QUARTO_PATHS = ["_quarto.yml", "custom.scss", "index.qmd"]
 
 def print_status(message: str, color: str = Colors.INFO) -> None:
     """Print a formatted status message."""

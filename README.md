@@ -73,7 +73,7 @@ During the project creation process, you will be prompted to enter values for th
 |  ├─ processed                # Cleaned data
 |  └─ raw                      # Original data
 |
-├─ docs                        # Quarto's rendered docs (only if include_quarto = Yes)
+├─ docs                        # Project's documentation
 |   └─ .nojekyll               # Prevent Jekyll processing
 |
 ├─ _quarto.yml                 # Quarto's config file (only if include_quarto = Yes)

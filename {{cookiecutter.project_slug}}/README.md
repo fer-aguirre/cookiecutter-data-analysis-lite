@@ -24,10 +24,10 @@ Created by: {{cookiecutter.project_author}}
 |  ├─ interim                  # Intermediate data
 |  └─ raw                      # Original data
 |
-{% if cookiecutter.include_quarto == 'Yes' -%}
-├─ docs                        # Quarto's rendered docs
+├─ docs                        # Project's documentation
 |   └─ .nojekyll               # Prevent Jekyll processing
 |
+{% if cookiecutter.include_quarto == 'Yes' -%}
 ├─ _quarto.yml                 # Quarto's config file
 ├─ custom.scss                 # Quarto's Sass stylesheet
 ├─ index.qmd                   # Quarto's home page

@@ -75,15 +75,15 @@ class TestPostGenProject:
 
     def test_remove_quarto_files_when_not_included(self, mocker):
         mocker.patch('hooks.post_gen_project.INCLUDE_QUARTO', 'No')
-        mocker.patch('hooks.post_gen_project.QUARTO_PATHS', ['_quarto.yml', 'custom.scss', 'index.qmd', 'docs'])
-        mocker.patch('os.path.isdir', side_effect=lambda p: p == 'docs')
+        mocker.patch('hooks.post_gen_project.QUARTO_PATHS', ['_quarto.yml', 'custom.scss', 'index.qmd'])
+        mocker.patch('os.path.isdir', return_value=False)
         mocker.patch('os.path.exists', return_value=True)
         mock_rmtree = mocker.patch('shutil.rmtree')
         mock_remove = mocker.patch('os.remove')
 
         remove_quarto_files()
 
-        mock_rmtree.assert_called_once_with('docs')
+        mock_rmtree.assert_not_called()
         assert mock_remove.call_count == 3
         mock_remove.assert_any_call('_quarto.yml')
         mock_remove.assert_any_call('custom.scss')
