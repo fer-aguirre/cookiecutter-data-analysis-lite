@@ -50,6 +50,7 @@ During the project creation process, you will be prompted to enter values for th
 | `project_license`  | Choose between MIT License or GNU General Public License v3   |
 | `python_version`   | Choose between Python 3.8 or 3.11                             |
 | `package_manager`  | Choose between uv or poetry for dependency management         |
+| `include_quarto`   | Choose whether to include Quarto config files (defaults to No) |
 
 ---
 
@@ -61,6 +62,10 @@ During the project creation process, you will be prompted to enter values for th
 ├─ pyproject.toml              # Project dependencies
 ├─ README.md                   # Top-level README for this project
 |
+├─ {project_slug}              # Python package for this project
+|  ├─ __init__.py
+|  └─ utils.py                 # Path helpers (data_dir, outputs_dir, etc.)
+|
 ├─ assets                      # Resources for the project
 |
 ├─ data                        # Categorized data files
@@ -68,14 +73,14 @@ During the project creation process, you will be prompted to enter values for th
 |  ├─ processed                # Cleaned data
 |  └─ raw                      # Original data
 |
-├─ docs                        # Quarto's rendered docs
+├─ docs                        # Quarto's rendered docs (only if include_quarto = Yes)
 |   └─ .nojekyll               # Prevent Jekyll processing
 |
-├─ _quarto.yml                 # Quarto's config file
-├─ custom.scss                 # Quarto's Sass stylesheet
-├─ index.qmd                   # Quarto's home page
+├─ _quarto.yml                 # Quarto's config file (only if include_quarto = Yes)
+├─ custom.scss                 # Quarto's Sass stylesheet (only if include_quarto = Yes)
+├─ index.qmd                   # Quarto's home page (only if include_quarto = Yes)
 |
-├─ _notebooks                  # Jupyter notebooks
+├─ _notebooks                  # Jupyter notebooks (named "notebooks" if include_quarto = No)
 |  ├─ 0.0-collect-data.ipynb   # Gathering data
 |  ├─ 1.0-process-data.ipynb   # Data processing (fixing column types, data cleansing, etc.)
 |  ├─ 2.0-analyze-data.ipynb   # Exploratory data analysis
@@ -89,4 +94,19 @@ During the project creation process, you will be prompted to enter values for th
 ┴
 
 ```
+---
+
+## Working with paths
+
+Each generated project ships a `{project_slug}/utils.py` module with ready-made path helpers built on [pyprojroot](https://github.com/chendaniely/pyprojroot), so notebooks can reference project directories without hardcoding relative paths:
+
+```python
+from {project_slug}.utils import data_raw_dir, outputs_figures_dir
+
+df = pd.read_csv(data_raw_dir("my_file.csv"))
+fig.savefig(outputs_figures_dir("my_chart.png"))
+```
+
+Available helpers: `project_dir`, `data_dir`, `data_raw_dir`, `data_processed_dir`, `data_interim_dir`, `outputs_dir`, `outputs_figures_dir`, `outputs_tables_dir`, `assets_dir`.
+
 ---

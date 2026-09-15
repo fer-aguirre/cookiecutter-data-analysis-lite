@@ -11,6 +11,11 @@ Created by: {{cookiecutter.project_author}}
 ├─ LICENSE                     # Project's license
 ├─ pyproject.toml              # Project dependencies
 ├─ README.md                   # Top-level README for this project
+├─ setup.py                    # Import project as a python module
+|
+├─ {{cookiecutter.project_slug}}            # Python package for this project
+|  ├─ __init__.py
+|  └─ utils.py                 # Path helpers (data_dir, outputs_dir, etc.)
 |
 ├─ assets                      # Resources for the project
 |
@@ -19,6 +24,7 @@ Created by: {{cookiecutter.project_author}}
 |  ├─ interim                  # Intermediate data
 |  └─ raw                      # Original data
 |
+{% if cookiecutter.include_quarto == 'Yes' -%}
 ├─ docs                        # Quarto's rendered docs
 |   └─ .nojekyll               # Prevent Jekyll processing
 |
@@ -26,7 +32,8 @@ Created by: {{cookiecutter.project_author}}
 ├─ custom.scss                 # Quarto's Sass stylesheet
 ├─ index.qmd                   # Quarto's home page
 |
-├─ _notebooks                  # Jupyter notebooks
+{% endif -%}
+├─ {% if cookiecutter.include_quarto == 'Yes' %}_notebooks{% else %}notebooks{% endif %}                  # Jupyter notebooks
 |  ├─ 0.0-collect-data.ipynb   # Gathering data
 |  ├─ 1.0-process-data.ipynb   # Data processing (fixing column types, data cleansing, etc.)
 |  ├─ 2.0-analyze-data.ipynb   # Exploratory data analysis
@@ -39,6 +46,21 @@ Created by: {{cookiecutter.project_author}}
 ┴
 
 ```
+---
+
+## Working with paths
+
+Import ready-made paths to the project's directories instead of hardcoding relative paths, so notebooks keep working regardless of where they're run from:
+
+```python
+from {{cookiecutter.project_slug}}.utils import data_raw_dir, outputs_figures_dir
+
+df = pd.read_csv(data_raw_dir("my_file.csv"))
+fig.savefig(outputs_figures_dir("my_chart.png"))
+```
+
+Available helpers: `project_dir`, `data_dir`, `data_raw_dir`, `data_processed_dir`, `data_interim_dir`, `outputs_dir`, `outputs_figures_dir`, `outputs_tables_dir`, `assets_dir`.
+
 ---
 
 ## License

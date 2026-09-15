@@ -21,6 +21,7 @@ numpy = "*"
 requests = "*"
 plotnine = "*"
 openpyxl = "*"
+pyprojroot = "*"
 
 [build-system]
 requires = ["poetry-core"]
@@ -49,6 +50,7 @@ dependencies = [
     "requests",
     "plotnine",
     "openpyxl",
+    "pyprojroot",
 ]
 
 [build-system]

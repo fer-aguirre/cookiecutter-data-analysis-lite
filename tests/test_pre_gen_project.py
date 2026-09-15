@@ -13,11 +13,9 @@ class TestPreGenProject:
         assert captured.out == f"{MESSAGE_COLOR}Test message{RESET_ALL}\n"
 
     @patch('os.getcwd', return_value='/mocked/path')
-    @patch('sys.exit')
-    def test_main_exit_code_success(self, mock_exit, mock_getcwd):
+    def test_main_exit_code_success(self, mock_getcwd):
         with patch('hooks.pre_gen_project.PROJECT_SLUG', 'valid_slug'):
             assert main() == 0
-            mock_exit.assert_called_with(0)
 
     def test_validate_project_slug_invalid_characters(self):
         error_message = validate_project_slug("invalid-slug")
@@ -30,8 +28,6 @@ class TestPreGenProject:
         assert captured.out == f"{ERROR_COLOR}Error message{RESET_ALL}\n"
 
     @patch('os.getcwd', return_value='/mocked/path')
-    @patch('sys.exit')
-    def test_main_exit_code_failure(self, mock_exit, mock_getcwd):
+    def test_main_exit_code_failure(self, mock_getcwd):
         with patch('hooks.pre_gen_project.PROJECT_SLUG', 'invalid-slug'):
             assert main() == 1
-            mock_exit.assert_called_with(1)

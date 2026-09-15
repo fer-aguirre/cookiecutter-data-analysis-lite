@@ -14,5 +14,9 @@
     "package_manager": [
         "uv",
         "poetry"
+    ],
+    "include_quarto": [
+        "No",
+        "Yes"
     ]
 }

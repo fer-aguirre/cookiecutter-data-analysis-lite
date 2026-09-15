@@ -132,5 +132,7 @@ cython_debug/
 # Secret files
 config.ini
 
+{% if cookiecutter.include_quarto == 'Yes' -%}
 # Quarto files
 /.quarto/
+{% endif -%}

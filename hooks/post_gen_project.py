@@ -24,8 +24,11 @@ PROJECT_SLUG = "{{cookiecutter.project_slug}}"
 PROJECT_DESCRIPTION = "{{cookiecutter.project_description}}"
 PROJECT_AUTHOR = "{{cookiecutter.project_author}}"
 RAW_PYTHON_VERSION = "{{cookiecutter.python_version}}"
+INCLUDE_QUARTO = "{{cookiecutter.include_quarto}}"
 
 MINIMUM_PYTHON = (3, 8)
+
+QUARTO_PATHS = ["_quarto.yml", "custom.scss", "index.qmd", "docs"]
 
 def print_status(message: str, color: str = Colors.INFO) -> None:
     """Print a formatted status message."""
@@ -77,6 +80,18 @@ def update_pyproject_file() -> None:
 
     with open(pyproject_path, "w", encoding="utf-8") as f:
         f.write(content)
+
+def remove_quarto_files() -> None:
+    """Removes Quarto config files when Quarto support was not selected."""
+    if INCLUDE_QUARTO == "Yes":
+        return
+
+    print_status("Removing Quarto config files...", Colors.INFO)
+    for path in QUARTO_PATHS:
+        if os.path.isdir(path):
+            shutil.rmtree(path)
+        elif os.path.exists(path):
+            os.remove(path)
 
 def run_command(command: List[str], error_message: str = "Command failed") -> bool:
     """Run a shell command safely."""
@@ -159,6 +174,7 @@ def main() -> int:
     
     # Sync pyproject.toml with target version before running package managers
     update_pyproject_file()
+    remove_quarto_files()
 
     success = False
     if PACKAGE_MANAGER == "poetry":
